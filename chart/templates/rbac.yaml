@@ -15,6 +15,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: {{ include "itl.common.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
   name: list-ingresses-cluster
