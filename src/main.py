@@ -3,7 +3,7 @@ from fastapi.responses import RedirectResponse
 from v1.routers.discovery import router as v1_discovery_router
 from v1_mock.routers.discovery import router as v1_mock_discovery_router
 
-app = FastAPI()
+app = FastAPI(docs_url=None)
 app_v1 = FastAPI(servers=[
         {"url": "/v1", "description": "V1 environment"},
         {"url": "https://api.itlusions.com/servicediscovery/v1", "description": "V1 environment"}
