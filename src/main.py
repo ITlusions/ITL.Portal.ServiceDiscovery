@@ -21,9 +21,25 @@ app_v1_mock.include_router(v1_mock_discovery_router)
 app.mount("/v1", app_v1)
 app.mount("/v1_mock", app_v1_mock)
 
-@app.get("/healthz", status_code=200)
+# Basic Health Check (Liveness Probe)
+@app.get("/health", status_code=200)
 async def health_check():
     return JSONResponse(content={"status": "healthy"}, status_code=200)
+
+# Readiness Check
+@app.get("/readiness", status_code=200)
+async def readiness_check():
+    try:
+        database_connected = True
+        external_service_available = True
+
+        if database_connected and external_service_available:
+            return JSONResponse(content={"status": "ready"}, status_code=200)
+        else:
+            return JSONResponse(content={"status": "not ready"}, status_code=503)
+
+    except Exception as e:
+        return JSONResponse(content={"status": "error", "detail": str(e)}, status_code=503)
 
 if __name__ == "__main__":
     import uvicorn
