@@ -58,7 +58,7 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
   tls:
-    - secretName: portal-itlusions-nl-tls
+    - secretName: ds-dev-itlusions-nl-tls
       hosts:
         - ds.dev.itlusions.nl
         - ds.dev.itlusions.com
@@ -77,11 +77,11 @@ resources: {}
 
 livenessProbe:
   httpGet:
-    path: /healthz
+    path: /
     port: 8000
 readinessProbe:
   httpGet:
-    path: /healthz
+    path: /
     port: 8000
 
 autoscaling:
