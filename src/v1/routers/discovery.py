@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from controllers.servicediscovery.discovery import get_services, get_ingresses
-from models.models import DiscoveredServices
+from v1.controllers.servicediscovery.discovery import get_services, get_ingresses
+from v1.models.models import DiscoveredServices
 
 router = APIRouter()
 
