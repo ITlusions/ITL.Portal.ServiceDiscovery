@@ -1,14 +1,9 @@
 from fastapi import FastAPI
-from discovery import get_services, get_ingresses
-from models import DiscoveredServices
+from routers.discovery import router as discovery_router
 
 app = FastAPI()
+app.include_router(discovery_router)
 
-@app.get("/discovered-services", response_model=DiscoveredServices)
-async def get_discovered_services():
-    # Retrieve discovered services and ingresses
-    ingresses = get_ingresses()
-    services = get_services()
-
-    # Return data encapsulated in DiscoveredServices model
-    return DiscoveredServices(ingresses=ingresses, services=services)
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

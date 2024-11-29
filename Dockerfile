@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM ghcr.io/astral-sh/uv:python3.12-alpine
 
 # Set the working directory in the container
 WORKDIR /app
@@ -7,7 +7,7 @@ WORKDIR /app
 COPY ./src /app
 COPY ./requirements.txt /tmp/requirements.txt
 # Install dependencies
-RUN pip install --no-cache-dir -r /tmp/requirements.txt
+RUN uv pip install --no-cache-dir -r /tmp/requirements.txt --system
 
 # Expose the port the app runs on
 EXPOSE 8000
