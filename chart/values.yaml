@@ -77,12 +77,12 @@ resources: {}
 
 livenessProbe:
   httpGet:
-    path: /
-    port: http
+    path: /healthz
+    port: 8000
 readinessProbe:
   httpGet:
-    path: /
-    port: http
+    path: /healthz
+    port: 8000
 
 autoscaling:
   enabled: false

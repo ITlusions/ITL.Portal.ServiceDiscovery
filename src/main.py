@@ -21,7 +21,7 @@ app_v1_mock.include_router(v1_mock_discovery_router)
 app.mount("/v1", app_v1)
 app.mount("/v1_mock", app_v1_mock)
 
-@app.get("/health", status_code=200)
+@app.get("/healthz", status_code=200)
 async def health_check():
     return JSONResponse(content={"status": "healthy"}, status_code=200)
 
