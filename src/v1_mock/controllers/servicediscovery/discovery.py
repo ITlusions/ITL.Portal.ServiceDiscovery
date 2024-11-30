@@ -1,7 +1,7 @@
 from kubernetes import client, config
 from typing import List, Dict
 from v1_mock.models.models import Service, Ingress, ServiceEndpoint
-from v1_mock.base.config.k8s_config import load_k8s_config
+from base.k8s_config import load_k8s_config
 
 v1_services, v1_ingresses = load_k8s_config()
 
