@@ -21,5 +21,9 @@ class Ingress(BaseModel):
     annotations: Optional[Dict[str, str]] = {}
 
 class DiscoveredServices(BaseModel):
-    ingresses: List[Ingress]
-    services: List[Service]
+    services: Optional[List[Service]] = None
+    ingresses: Optional[List[Ingress]] = None
+
+class ServiceFilterRequest(BaseModel):
+    annotation_key: Optional[str] = None
+    annotation_value: Optional[str] = None
