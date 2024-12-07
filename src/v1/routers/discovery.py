@@ -70,12 +70,16 @@ async def post_discovered_services(filter_request: ServiceFilterRequest):
     tags=["Service Discovery"],
 )
 async def get_services_route(
-    annotation_key: Optional[str] = None, annotation_value: Optional[str] = None
+    annotation_key: Optional[str] = None,
+    annotation_value: Optional[str] = None,
+    register: bool = False,
 ):
     """Retrieve services based on optional annotation filters."""
     try:
         services = controller_get_services(
-            annotation_key=annotation_key, annotation_value=annotation_value
+            annotation_key=annotation_key,
+            annotation_value=annotation_value,
+            register=register,
         )
     except Exception as e:
         print(e)
