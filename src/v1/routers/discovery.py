@@ -8,18 +8,27 @@ from v1.models.models import DiscoveredServices, ServiceFilterRequest
 
 router = APIRouter()
 
-async def fetch_services_and_ingresses(annotation_key: Optional[str] = None, annotation_value: Optional[str] = None):
+
+async def fetch_services_and_ingresses(
+    annotation_key: Optional[str] = None, annotation_value: Optional[str] = None
+):
     """Helper function to fetch services and ingresses."""
     try:
-        services = controller_get_services(annotation_key=annotation_key, annotation_value=annotation_value)
+        services = controller_get_services(
+            annotation_key=annotation_key, annotation_value=annotation_value
+        )
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error fetching services: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Error fetching services: {str(e)}"
+        )
 
     try:
         ingresses = controller_get_ingresses()
     except Exception as e:
         print(e)
-        raise HTTPException(status_code=500, detail=f"Error fetching ingresses: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Error fetching ingresses: {str(e)}"
+        )
 
     return DiscoveredServices(services=services, ingresses=ingresses)
 
@@ -31,7 +40,9 @@ async def fetch_services_and_ingresses(annotation_key: Optional[str] = None, ann
     description="Retrieve all services and ingresses based on optional annotation filters.",
     tags=["Service Discovery"],
 )
-async def get_discovered_services(annotation_key: Optional[str] = None, annotation_value: Optional[str] = None):
+async def get_discovered_services(
+    annotation_key: Optional[str] = None, annotation_value: Optional[str] = None
+):
     """Retrieve services and ingresses based on optional annotation filters."""
     return await fetch_services_and_ingresses(annotation_key, annotation_value)
 
@@ -58,13 +69,19 @@ async def post_discovered_services(filter_request: ServiceFilterRequest):
     description="Retrieve services based on optional annotation filters.",
     tags=["Service Discovery"],
 )
-async def get_services_route(annotation_key: Optional[str] = None, annotation_value: Optional[str] = None):
+async def get_services_route(
+    annotation_key: Optional[str] = None, annotation_value: Optional[str] = None
+):
     """Retrieve services based on optional annotation filters."""
     try:
-        services = controller_get_services(annotation_key=annotation_key, annotation_value=annotation_value)
+        services = controller_get_services(
+            annotation_key=annotation_key, annotation_value=annotation_value
+        )
     except Exception as e:
         print(e)
-        raise HTTPException(status_code=500, detail=f"Error fetching services: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Error fetching services: {str(e)}"
+        )
     return DiscoveredServices(services=services)
 
 
@@ -81,5 +98,7 @@ async def get_ingresses_route():
         ingresses = controller_get_ingresses()
     except Exception as e:
         print(e)
-        raise HTTPException(status_code=500, detail=f"Error fetching ingresses: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Error fetching ingresses: {str(e)}"
+        )
     return DiscoveredServices(ingresses=ingresses)
