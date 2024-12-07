@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from typing import Optional
 from v1.controllers.servicediscovery.discovery import (
     get_services as controller_get_services,
@@ -72,7 +72,7 @@ async def post_discovered_services(filter_request: ServiceFilterRequest):
 async def get_services_route(
     annotation_key: Optional[str] = None,
     annotation_value: Optional[str] = None,
-    register: bool = False,
+    register: bool = Query(False, description="Toggle the service registration")
 ):
     """Retrieve services based on optional annotation filters."""
     try:
