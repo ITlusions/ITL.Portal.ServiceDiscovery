@@ -1,11 +1,9 @@
-from kubernetes import client, config
-from typing import List, Dict, Optional
+from typing import List, Optional
 from v1.models.models import Service, Ingress, ServiceEndpoint
 from v1.controllers.registerservices.controller import register_to_crd
 from base.k8s_config import load_k8s_config
 
 v1_services, v1_ingresses = load_k8s_config()
-
 
 def get_services(
     annotation_key: Optional[str] = None,
