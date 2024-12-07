@@ -3,10 +3,12 @@ from fastapi.responses import JSONResponse
 
 router = APIRouter()
 
+
 # Basic Health Check (Liveness Probe)
 @router.get("/health", status_code=200, tags=["Health"])
 async def health_check():
     return JSONResponse(content={"status": "healthy"}, status_code=200)
+
 
 # Readiness Check
 @router.get("/readiness", status_code=200, tags=["Health"])
@@ -22,4 +24,6 @@ async def readiness_check():
             return JSONResponse(content={"status": "not ready"}, status_code=503)
 
     except Exception as e:
-        return JSONResponse(content={"status": "error", "detail": str(e)}, status_code=503)
+        return JSONResponse(
+            content={"status": "error", "detail": str(e)}, status_code=503
+        )

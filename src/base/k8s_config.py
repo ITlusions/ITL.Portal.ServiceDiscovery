@@ -1,6 +1,7 @@
 from kubernetes import config, client
 import os
 
+
 def load_k8s_config():
     """Load Kubernetes configuration."""
     try:
@@ -9,10 +10,12 @@ def load_k8s_config():
         print("Loaded in-cluster Kubernetes config.")
     except config.ConfigException:
         # Fallback to local kubeconfig file (for local development)
-        kubeconfig_path = os.getenv("KUBECONFIG", "~/.kube/config")  # Default to ~/.kube/config if not set
+        kubeconfig_path = os.getenv(
+            "KUBECONFIG", "~/.kube/config"
+        )  # Default to ~/.kube/config if not set
         config.load_kube_config(config_file=kubeconfig_path)
         print(f"Loaded kubeconfig from {kubeconfig_path}")
-    
+
     # Initialize the Kubernetes clients
     v1_services = client.CoreV1Api()
     v1_ingresses = client.NetworkingV1Api()
