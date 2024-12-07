@@ -72,7 +72,7 @@ async def post_discovered_services(filter_request: ServiceFilterRequest):
 async def get_services_route(
     annotation_key: Optional[str] = None,
     annotation_value: Optional[str] = None,
-    register: bool = Query(False, description="Toggle the service registration")
+    register: bool = Query([], description="Toggle the service registration")
 ):
     """Retrieve services based on optional annotation filters."""
     try:

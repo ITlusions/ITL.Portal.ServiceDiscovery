@@ -8,7 +8,7 @@ v1_services, v1_ingresses = load_k8s_config()
 def get_services(
     annotation_key: Optional[str] = None,
     annotation_value: Optional[str] = None,
-    register: bool = False,
+    register: bool = None,
 ) -> List[Service]:
     """
     Fetches services, optionally filtered by annotation key and value.
