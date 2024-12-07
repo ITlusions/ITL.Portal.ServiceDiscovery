@@ -4,5 +4,6 @@ pydantic
 kubernetes
 pytest
 pytest-cov
+pytest-asyncio
 coverage
 httpx
