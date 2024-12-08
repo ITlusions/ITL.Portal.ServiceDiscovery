@@ -7,6 +7,7 @@ from base.k8s_config import load_k8s_config
 v1_services, v1_ingresses = load_k8s_config()
 custom_api = client.CustomObjectsApi()
 
+
 def register_to_crd(service: client.V1Service) -> None:
     """
     Register a discovered service into the ServiceOnboarding CRD.

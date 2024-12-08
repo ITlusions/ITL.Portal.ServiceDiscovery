@@ -5,10 +5,10 @@ from base.k8s_config import load_k8s_config
 
 v1_services, v1_ingresses = load_k8s_config()
 
+
 def get_services(
     annotation_key: Optional[str] = None,
     annotation_value: Optional[str] = None,
-    register: bool = None,
 ) -> List[Service]:
     """
     Fetches services, optionally filtered by annotation key and value.
@@ -44,8 +44,6 @@ def get_services(
                     endpoints=endpoints,
                 )
                 services_info.append(service_info)
-                if register:
-                    register_to_crd(service)
         else:
             # If no filter is provided, return all services with the 'portal-discovery' annotation
             if annotations.get("portal-discovery") == "true":
@@ -62,8 +60,6 @@ def get_services(
                     endpoints=endpoints,
                 )
                 services_info.append(service_info)
-                if register:
-                    register_to_crd(service)
 
     return services_info
 
